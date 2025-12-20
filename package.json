@@ -1,0 +1,7 @@
+{
+  "name": "boilerplate-ai-web",
+  "private": true,
+  "workspaces": [
+    "web"
+  ]
+}

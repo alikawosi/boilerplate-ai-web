@@ -1,0 +1,66 @@
+# Project: Boilerplate AI
+
+## Project Overview
+
+Boilerplate AI is a platform that generates production-ready boilerplates for developers.
+The workflow consists of three main phases:
+
+1. **Ideation**: AI agent helps user refine their app idea and requirements.
+2. **Branding**: AI agent assists in defining branding, colors, and assets.
+3. **Delivery**: User receives the generated code repository via our CLI.
+
+## Tech Stack
+
+- **Framework**: Next.js 14+ (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Library**: Shadcn UI (Radix Primitives)
+- **Database**: Supabase
+- **Package Manager**: pnpm
+
+## Project Structure & Architecture
+
+Follow this directory structure for all new components and logic:
+
+1. **Atomic UI (`web/components/ui/`)**
+
+   - Pure, reusable design tokens (Buttons, Inputs, Cards).
+   - mostly Shadcn components. Do not add business logic here.
+
+2. **Global Layout (`web/components/layout/`)**
+
+   - Components shared across the entire app (Navbar, Footer, Sidebar).
+
+3. **Feature Components (`web/components/features/[feature-name]/`)**
+
+   - Domain-specific logic and complex UI grouped by feature.
+   - Examples: `features/ideation/`, `features/billing/`, `features/landing/`.
+   - **Rule**: If a component belongs to a specific business domain, it goes here.
+
+4. **Route-Specific Components (`web/app/[route]/_components/`)**
+   - Components used ONLY within a single specific route/page.
+
+## Coding Standards & Rules
+
+### 1. SOLID & OOP Principles
+
+- **Single Responsibility**: Each component should do one thing well. Separate layout/presentation from data fetching/logic.
+- **Encapsulation**: Keep state local unless absolutely necessary to share. Use custom hooks to encapsulate complex logic.
+- **Interfaces**: Always define explicit TypeScript interfaces for component props and data models.
+
+### 2. File Naming
+
+- Components: `PascalCase.tsx` (e.g., `PricingTable.tsx`)
+- Utilities/Hooks: `camelCase.ts` (e.g., `useAuth.ts`, `stripe.ts`)
+
+### 3. Best Practices
+
+- Use **Server Components** by default. Add `"use client"` only when interactivity (state, hooks, event listeners) is required.
+- **Tailwind**: Use utility classes for styling. Avoid inline styles or CSS modules unless necessary for complex animations.
+- **Type Safety**: No `any`. Strictly type all props, return values, and API responses.
+- **Imports**: Use absolute imports (e.g., `@/components/ui/button`) instead of relative paths.
+
+## Workflow
+
+- **Phase 1**: Landing Pages (Current focus)
+- **Phase 2**: Database Design

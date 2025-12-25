@@ -1,7 +1,13 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { createClient } from "@/lib/supabase/server";
 
-export function Navbar() {
+export async function Navbar() {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <div className="fixed top-0 z-50 w-full flex justify-center pt-4 px-4">
       <header className="w-full max-w-5xl rounded-full border bg-background/60 backdrop-blur-xl shadow-sm">
@@ -38,16 +44,26 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Link href="/login">
-              <Button variant="ghost" size="sm" className="hidden sm:flex">
-                Log in
-              </Button>
-            </Link>
-            <Link href="/login?tab=signup">
-              <Button size="sm" className="rounded-full px-6">
-                Sign up
-              </Button>
-            </Link>
+            {user ? (
+              <Link href="/dashboard">
+                <Button size="sm" className="rounded-full px-6">
+                  Dashboard
+                </Button>
+              </Link>
+            ) : (
+              <>
+                <Link href="/login">
+                  <Button variant="ghost" size="sm" className="hidden sm:flex">
+                    Log in
+                  </Button>
+                </Link>
+                <Link href="/login?tab=signup">
+                  <Button size="sm" className="rounded-full px-6">
+                    Sign up
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </header>
